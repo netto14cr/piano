@@ -9,7 +9,8 @@ document.write(unescape('%20%09%3C%6D%65%74%61%20%70%72%6F%70%65%72%74%79%3D%22%
 
 </head>
 <body>
-  <div style="position: absolute; left:0px; top:0px;"><i><small>@karanarora</small></i></div>
+  <div style="position: absolute; left:0px; top:0px;"><i><small>@netto14cr</small></i></div>
+  <div id="console"></div>
   <div class="piano">
     <div data-note="C" class="key white"></div>
     <div data-note="Db" class="key black"></div>
@@ -37,5 +38,25 @@ document.write(unescape('%20%09%3C%6D%65%74%61%20%70%72%6F%70%65%72%74%79%3D%22%
   <audio id="A" src="notes/A.mp3"></audio>
   <audio id="Bb" src="notes/Bb.mp3"></audio>
   <audio id="B" src="notes/B.mp3"></audio>
+
+  <script>
+    // Función para capturar y mostrar mensajes de la consola en un elemento HTML
+    function captureConsoleLogs() {
+      var consoleLogs = [];
+      var oldConsoleLog = console.log;
+      console.log = function (message) {
+        consoleLogs.push(message);
+        oldConsoleLog.apply(console, arguments);
+      };
+
+      setInterval(function () {
+        var consoleDiv = document.getElementById('console');
+        consoleDiv.innerHTML = consoleLogs.join('<br>');
+      }, 1000); // Actualizar cada segundo
+    }
+
+    // Llamar a la función para capturar y mostrar mensajes de la consola
+    captureConsoleLogs();
+  </script>
 </body>
 </html>
